@@ -1,12 +1,18 @@
 <template>
   <div id="app">
+    <main-layout>
+      <slot />
+    </main-layout>
   </div>
 </template>
 
 <script>
-
+import MainLayout from "./components/MainLayout";
 export default {
-  name: 'App'
+  name: 'App',
+  components:{
+    MainLayout
+  }
 }
 </script>
 
