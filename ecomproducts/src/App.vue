@@ -15,20 +15,20 @@ import {
 import * as actionTypes from "./state/actions/actionTypes";
 
 export default {
-  name: 'App',
+  name: "App",
   components:{
     MainLayout
+  },
+  async created() {
+    const request = await client.getProducts();
+    this.updateAllProducts(request?.data ?? []);
   },
   methods:{
     ...mapActions({
       updateAllProducts: actionTypes.UPDATE_ALL_PRODUCTS
     })
-  },
-  async created() {
-    const request = await client.getProducts();
-    this.updateAllProducts(request?.data ?? []);
   }
-}
+};
 </script>
 
 <style>

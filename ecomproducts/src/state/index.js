@@ -6,14 +6,14 @@ import Vue from "vue";
 Vue.use(Vuex);
 
 const state = {
-    allProducts: [],
-    rangeMax: 0,
-    rangeMin: 0
-}
+  allProducts: [],
+  rangeMax: 0,
+  rangeMin: 0
+};
 
 export default new Vuex.Store({
-    state,
-    mutations,
-    actions,
-    getters,
+  state,
+  mutations,
+  actions,
+  getters,
 });

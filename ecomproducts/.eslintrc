@@ -1,0 +1,53 @@
+﻿{
+    "root": true,
+    "env": {
+        "node": true,
+        "browser": true
+    },
+    "extends": [
+        "plugin:vue/recommended",
+        "eslint:recommended",
+    ],
+    "rules": {
+        "vue/no-v-html": 0,
+        "no-prototype-builtins": 0,
+        "object-curly-spacing":  ["error", "always"],
+        "object-curly-newline":  ["error", { "minProperties": 1 }],
+        "template-curly-spacing": ["error", "always"],
+        "semi": ["error", "always"],
+        "quotes": ["error", "double"],
+        "vue/object-curly-spacing":  ["error", "always"],
+        "indent": ["error", 2],
+        "space-before-blocks": ["error", "always"],
+        "arrow-spacing": [
+            "error",
+            {
+                "before": true,
+                "after": true
+            }
+        ],
+        "keyword-spacing": [
+            "error",
+            {
+                "before": true,
+                "after": true
+            }
+        ],
+        "max-len": [
+            "error",
+            {
+                "code": 100,
+                "tabWidth": 2,
+                "ignoreRegExpLiterals": true,
+                "ignoreTemplateLiterals": true,
+                "ignoreStrings": true,
+                "ignoreUrls": true,
+                "ignoreTrailingComments": true,
+                "ignoreComments": true
+            }
+        ]
+    },
+    "parserOptions": {
+        "parser": "@babel/eslint-parser"
+    }
+}
