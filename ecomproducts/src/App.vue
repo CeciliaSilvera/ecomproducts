@@ -8,10 +8,25 @@
 
 <script>
 import MainLayout from "./components/MainLayout";
+import client from "./client";
+import {
+  mapActions
+} from "vuex";
+import * as actionTypes from "./state/actions/actionTypes";
+
 export default {
   name: 'App',
   components:{
     MainLayout
+  },
+  methods:{
+    ...mapActions({
+      updateAllProducts: actionTypes.UPDATE_ALL_PRODUCTS
+    })
+  },
+  async created() {
+    const request = await client.getProducts();
+    this.updateAllProducts(request?.data ?? []);
   }
 }
 </script>
