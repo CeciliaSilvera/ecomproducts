@@ -2,6 +2,8 @@
 import mutations from "@/state/mutations";
 import actions from "@/state/actions";
 import getters from "@/state/getters";
+import Vue from "vue";
+Vue.use(Vuex);
 
 const state = {
     allProducts: [],
@@ -10,7 +12,8 @@ const state = {
 }
 
 export default new Vuex.Store({
+    state,
     mutations,
     actions,
-    getters
+    getters,
 });
