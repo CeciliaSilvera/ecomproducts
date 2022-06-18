@@ -30,4 +30,12 @@ describe("Products", () => {
     expect(products.exists()).toBeTruthy();
     expect(products).toHaveLength(20);
   });
+  it("Should find all 4 categories", () => {
+    const categories = store.getters[getterTypes.CATEGORIES];
+    expect(categories).toContain("women's clothing");
+    expect(categories).toContain("electronics");
+    expect(categories).toContain("jewelery");
+    expect(categories).toContain("men's clothing");
+    expect(categories).toHaveLength(4);
+  });
 });

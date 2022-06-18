@@ -7,8 +7,15 @@ const getters = {
   [getterTypes.MIN_PRICE]: () => {
     // TODO get allProducts min
   },
-  [getterTypes.CATEGORIES]: () => {
-    // TODO get categories from allProducts
+  [getterTypes.CATEGORIES]: (rootState) => {
+    const categories = rootState.allProducts
+      .reduce((prev, curr) => {
+        if (!prev.includes(curr.category)) {
+          return [curr.category, ...prev];
+        } 
+        return prev;
+      }, []);
+    return categories;
   },
   [getterTypes.PRODUCTSBY_CATEGORY]: () => {
     // TODO filter from allProducts, categories and selected category

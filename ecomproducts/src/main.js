@@ -1,15 +1,15 @@
 import Vue from "vue";
 import App from "./App.vue";
 import VueRouter from "vue-router";
-import Products from "./components/Products";
 import Product from "./components/Product";
 import store from "./state";
+import ProductsListing from "@/components/ProductsListing";
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 const routes = [
   {
-    path: "/", component: Products
+    path: "/", component: ProductsListing
   },
   {
     path: "/product/:id", component: Product
