@@ -5,11 +5,15 @@ import getters from "@/state/getters";
 import Vue from "vue";
 Vue.use(Vuex);
 
-const state = {
-  allProducts: [],
-  rangeMax: 0,
-  rangeMin: 0
+const getInitialState = () => {
+  return {
+    allProducts: [],
+    rangeMax: 0,
+    rangeMin: 0
+  };
 };
+
+const state = getInitialState();
 
 export default new Vuex.Store({
   state,

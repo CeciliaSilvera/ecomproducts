@@ -4,21 +4,12 @@
       <h1>Products</h1>
     </div>
     <div class="product-list">
-      <div
-        v-for="(prod, idx) in allProducts"
+      <product-preview
+        v-for="(product, idx) in allProducts"
         :key="idx"
-        class="product"
-      >
-        <div
-          class="thumbnail"
-          :style="{ backgroundImage: `url(${prod.image})` }"
-        />
-        <div class="summary">
-          <h4>{{ prod.title }}</h4>
-          <p>price: {{ prod.price }}</p>
-          <p>category: {{ prod.category }}</p>
-        </div>
-      </div>
+        ref="product-preview"
+        :product="product"
+      />
     </div>
   </div>
 </template>
@@ -27,9 +18,13 @@
 import {
   mapState
 } from "vuex";
+import ProductPreview from "@/components/ProductPreview";
 
 export default {
   name: "Products",
+  components: {
+    ProductPreview 
+  },
   computed:{
     ...mapState({
       allProducts: state => state.allProducts
@@ -39,29 +34,6 @@ export default {
 </script>
 
 <style scoped>
-  .product {
-    box-shadow: 0 0 4px #ccc;
-    border: 1px solid #ccc;
-    padding: 1.5rem;
-    overflow: hidden;
-    cursor: pointer;
-    display: grid;
-    grid-template-rows: 1fr 2fr;
-    grid-row-gap: 2rem;
-  }
-  
-  .thumbnail {
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-  }
-  
-  .summary {
-    text-align: left;
-    display: flex;
-    flex-flow: column;
-  }
-  
   .product-list {
     display: grid;
     gap: 1rem;
