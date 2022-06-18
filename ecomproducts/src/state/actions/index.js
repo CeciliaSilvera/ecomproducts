@@ -17,6 +17,21 @@ const actions = {
   }, rangeMax) => {
     commit(mutationTypes.SET_RANGE_MAX, rangeMax);
   },
+  [actionTypes.UPDATE_CATEGORY]: ({
+    commit, state, dispatch
+  }, category) => {
+    const isSelectedTwice = state.category === category;
+    state.filters.category.isActive = !isSelectedTwice;
+    dispatch(actionTypes.UPDATE_FILTERS, {
+      ...state.filters 
+    });
+    commit(mutationTypes.SET_CATEGORY, isSelectedTwice ? null : category);
+  },
+  [actionTypes.UPDATE_FILTERS]: ({
+    commit
+  }, filters) => {
+    commit(mutationTypes.SET_FILTERS, filters);
+  },
 };
 
 export default actions;

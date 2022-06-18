@@ -10,6 +10,12 @@ const mutations = {
   [mutationTypes.SET_RANGE_MAX]: (state, rangeMax) => {
     state.rangeMax = rangeMax;
   },
+  [mutationTypes.SET_CATEGORY]: (state, category) => {
+    state.category = category;
+  },
+  [mutationTypes.SET_FILTERS]: (state, filters) => {
+    state.filters = filters;
+  },
 };
 
 export default mutations;

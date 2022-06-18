@@ -8,8 +8,18 @@ Vue.use(Vuex);
 const getInitialState = () => {
   return {
     allProducts: [],
+    activeProducts: [],
     rangeMax: 0,
-    rangeMin: 0
+    rangeMin: 0,
+    category: null,
+    filters: {
+      category: {
+        isActive: false
+      },
+      byPrice: {
+        isActive: false
+      }
+    }
   };
 };
 

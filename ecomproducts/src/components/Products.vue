@@ -5,7 +5,7 @@
     </div>
     <div class="product-list">
       <product-preview
-        v-for="(product, idx) in allProducts"
+        v-for="(product, idx) in activeProducts"
         :key="idx"
         ref="product-preview"
         :product="product"
@@ -16,8 +16,11 @@
 
 <script>
 import {
-  mapState
+  mapGetters,
 } from "vuex";
+import {
+  ACTIVE_PRODUCTS 
+} from "@/state/getters/getterTypes";
 import ProductPreview from "@/components/ProductPreview";
 
 export default {
@@ -26,8 +29,8 @@ export default {
     ProductPreview 
   },
   computed:{
-    ...mapState({
-      allProducts: state => state.allProducts
+    ...mapGetters({
+      activeProducts: ACTIVE_PRODUCTS
     })
   }
 };

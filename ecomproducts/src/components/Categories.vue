@@ -3,16 +3,19 @@
     <category
       v-for="(cat, idx) in categories"
       :key="idx"
-      :category="cat"
+      :value="cat"
+      @click="updateCategory"
     />
   </div>
 </template>
 
 <script>
 import {
+  mapActions,
   mapGetters
 } from "vuex";
 import * as getterTypes from "@/state/getters/getterTypes";
+import * as actionTypes from "@/state/actions/actionTypes";
 import Category from "@/components/Category";
 export default {
   name: "Categories",
@@ -22,6 +25,11 @@ export default {
   computed:{
     ...mapGetters({
       categories: getterTypes.CATEGORIES
+    })
+  },
+  methods:{
+    ...mapActions({
+      updateCategory: actionTypes.UPDATE_CATEGORY
     })
   }
 };
