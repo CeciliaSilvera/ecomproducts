@@ -1,4 +1,5 @@
 # ecomproducts
+A small Vue.js project listing and filtering products by category, price and pagination. With vuex, vue-router and Jest
 
 ## Project setup
 ```
@@ -18,6 +19,11 @@ npm run build
 ### Lints and fixes files
 ```
 npm run lint
+```
+
+### Unit tests
+```
+npm run test
 ```
 
 ### Customize configuration
