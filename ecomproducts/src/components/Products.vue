@@ -1,10 +1,13 @@
 <template>
   <div>
-    <div v-if="chunks.length > 1">
+    <div
+      v-if="showPagination"
+      class="pagination"
+    >
       <button
         type="button"
         aria-label="show prev"
-        class="pagination-btn"
+        class="btn"
         @click="goPrev"
       >
         Prev
@@ -12,7 +15,7 @@
       <button
         type="button"
         aria-label="show next"
-        class="pagination-btn"
+        class="btn"
         @click="goNext"
       >
         Next
@@ -31,13 +34,13 @@
 
 <script>
 import {
-  mapGetters,
+  mapActions,
+  mapGetters, mapState,
 } from "vuex";
-import {
-  ACTIVE_PRODUCTS 
-} from "@/state/getters/getterTypes";
 import ProductPreview from "@/components/ProductPreview";
-
+import client from "@/client";
+import * as actionTypes from "@/state/actions/actionTypes";
+import * as getterTypes from "@/state/getters/getterTypes";
 export default {
   name: "Products",
   components: {
@@ -51,13 +54,19 @@ export default {
     };
   },
   computed:{
+    ...mapState({
+      allProducts: state => state.allProducts
+    }),
     ...mapGetters({
-      activeProducts: ACTIVE_PRODUCTS
-    })
+      activeProducts: getterTypes.ACTIVE_PRODUCTS
+    }),
+    showPagination() {
+      return this.chunks?.length > 1;
+    }
   },
   watch: {
     activeProducts() {
-      this.chunks = this.activeProducts.reduce((prev, curr, index) => {
+      this.chunks = this.activeProducts?.reduce((prev, curr, index) => {
         const chunkIndex = Math.floor(index/8);
         if (!prev[chunkIndex]) {
           prev[chunkIndex] = []; // start a new chunk
@@ -65,13 +74,26 @@ export default {
         prev[chunkIndex].push(curr);
         return prev;
       }, []);
-      this.displayProducts = this.chunks[this.chunkIndex];
+      // restart if on different index on filtering
+      if (this.chunkIndex > this.chunks?.length) {
+        this.chunkIndex = 0;
+      }
+      this.displayProducts = this.chunks ? this.chunks[this.chunkIndex] : [];
     },
     chunkIndex() {
-      this.displayProducts = this.chunks[this.chunkIndex];
+      this.displayProducts = this.chunks ?  this.chunks[this.chunkIndex] : [];
+    }
+  },
+  async mounted() {
+    if (!this.activeProducts) {
+      const request = await client.getProducts();
+      this.updateAllProducts(request?.data ?? []);
     }
   },
   methods:{
+    ...mapActions({
+      updateAllProducts: actionTypes.UPDATE_ALL_PRODUCTS
+    }),
     goNext() {
       if (this.chunks.length === this.chunkIndex +1) return false;
       this.chunkIndex += 1;
@@ -90,7 +112,10 @@ export default {
     gap: 1rem;
     grid-template-columns: repeat(auto-fill, 15rem);
   }
-  .pagination-btn {
+  .pagination {
+    padding-bottom: 2rem;
+  }
+  .pagination .btn {
     padding: 1rem;
     border: 1px solid #ccc;
     color: #2c3e50;
