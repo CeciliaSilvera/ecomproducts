@@ -75,6 +75,8 @@ export default {
     }
   },
   watch: {
+    // Note: There's a problem with these watchers that don't always update, 
+    // TODO: They should be replaced by getters in store. Might solve it
     activeProducts() {
       this.chunks = this.activeProducts?.reduce((prev, curr, index) => {
         const chunkIndex = Math.floor(index/8);
