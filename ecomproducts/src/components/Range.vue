@@ -1,7 +1,9 @@
 ﻿<template>
   <div class="range-container">
-    <label for="range">
-      Filter by price
+    <label
+      for="range" 
+      aria-label="Filter by price"
+    >
       <input
         id="range"
         name="range"
@@ -10,10 +12,12 @@
         :max="maxPrice"
         :value="maxPrice"
         class="range-input"
+        @input="onInput"
         @change="onChange"
       >
-      <span class="min">{{ 0 }}</span>
-      <span class="max">{{ maxPrice }}</span>
+      <output ref="rangevalue">${{ maxPrice }}</output>
+      <span class="min">${{ 0 }}</span>
+      <span class="max">${{ maxPrice }}</span>
     </label>
   </div>
 </template>
@@ -37,6 +41,9 @@ export default {
     ...mapActions({
       updateRangeMax: actionTypes.UPDATE_RANGE_MAX
     }),
+    onInput(e) {
+      this.$refs.rangevalue.value = e.target.value;
+    },
     onChange(e) {
       const currentValue = parseInt(e.target.value);
       this.updateRangeMax(currentValue);
@@ -48,7 +55,9 @@ export default {
 <style scoped>
   .range-container {
     padding-bottom: 3.4rem;
+    padding-top: 1rem;
     position: relative;
+    background-color: #D3CBB8;
   }
   
   label {
@@ -57,6 +66,7 @@ export default {
     width: 25rem;
     box-sizing: border-box;
     position: relative;
+    background-color: #D3CBB8;
   }
   .min, .max {
     position: absolute;
@@ -68,9 +78,62 @@ export default {
   .max {
     right: 0;
   }
-  .current {
-    position: absolute;
-    right: 0;
-    bottom: 1rem;
+  input[type="range"]{
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    outline: none !important;
+    appearance:none;
+    border:none;
+    border-radius:30px;
+  }
+  input[type="range"]::-moz-focus-outer {
+    border: 0;
+  }
+  input[type="range"]:hover {
+    outline:none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    background: #6D6027;
+    cursor: pointer;
+    border-radius: 50%;
+    outline:none;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: #6D6027;
+    cursor: pointer;
+    border-radius:50%;
+    border:none;
+    outline:none;
+  }
+  input[type="range"]::-moz-range-progress {
+    background-color: #6D6027;
+    height: 100%;
+    border-radius:30px;
+    border:none;
+  }
+  input[type="range"]::-moz-range-track {
+    background-color: #6D6027;
+    border-radius:30px;
+    border:none;
+    height: 100%;
+  }
+  input[type="range"]::-ms-fill-lower {
+    background-color: #fff;
+    height: 100%;
+    border-radius:30px;
+    border:none;
+  }
+  input[type="range"]::-ms-fill-upper {
+    background-color: #ccc;
+    border-radius:30px;
+    border:none;
+    height: 100%;
   }
 </style>

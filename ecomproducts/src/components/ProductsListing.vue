@@ -1,5 +1,5 @@
 ﻿<template>
-  <div>
+  <div class="products-listing-container">
     <filters />
     <products />
   </div>
@@ -17,5 +17,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .products-listing-container {
+    background-color: #D3CBB8;
+  }
 </style>

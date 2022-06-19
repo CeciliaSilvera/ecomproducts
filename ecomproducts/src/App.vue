@@ -38,6 +38,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  height: 100%;
+  width: 100%;
+  min-height: 50rem;
+}
+html, body {
+  padding: 0;
+  margin: 0;
+  background-color: #d3cbb8;
 }
 </style>

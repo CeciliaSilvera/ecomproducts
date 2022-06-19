@@ -43,5 +43,6 @@ export default {
     align-items: center;
     width: 100%;
     padding: 1rem;
+    background-color: #D3CBB8;
   }
 </style>

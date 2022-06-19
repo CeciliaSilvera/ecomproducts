@@ -7,18 +7,28 @@
       <button
         type="button"
         aria-label="show prev"
-        class="btn"
+        class="btn prev"
         @click="goPrev"
       >
-        Prev
+        <img
+          src="../assets/caret-down.svg"
+          alt="arrow"
+          height="60"
+          class="arrow-left"
+        >
       </button>
       <button
         type="button"
         aria-label="show next"
-        class="btn"
+        class="btn next"
         @click="goNext"
       >
-        Next
+        <img
+          src="../assets/caret-down.svg"
+          alt="arrow"
+          height="60"
+          class="arrow-right"
+        >
       </button>
     </div>
     <div class="product-list">
@@ -110,15 +120,23 @@ export default {
   .product-list {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(auto-fill, 15rem);
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    background-color: #D3CBB8;
   }
   .pagination {
     padding-bottom: 2rem;
   }
   .pagination .btn {
     padding: 1rem;
-    border: 1px solid #ccc;
-    color: #2c3e50;
-    background-color: #f0fff0;
+    border: none;
+    color: transparent;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  .arrow-left {
+    transform: rotate(90deg);
+  }
+  .arrow-right {
+    transform: rotate(-90deg);
   }
 </style>

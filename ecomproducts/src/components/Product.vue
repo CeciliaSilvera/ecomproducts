@@ -7,7 +7,7 @@
     <div class="summary">
       <h4>{{ product.title }}</h4>
       <p>{{ product.description }}</p>
-      <p>price: {{ product.price }}$</p>
+      <p>price: ${{ product.price }}</p>
       <p>category: {{ product.category }}</p>
     </div>
   </div>
@@ -42,6 +42,7 @@ export default {
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 2rem;
     max-width: 70%;
+    background-color: #ffffff;
   }
 
   .thumbnail {
