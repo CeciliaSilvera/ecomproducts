@@ -39,7 +39,7 @@ const getters = {
     }, []);
   },
   [getterTypes.PRODUCTSBY_RANGE]: (state) => {
-    state.allProducts.reduce((prev, curr) => {
+    return state.allProducts.reduce((prev, curr) => {
       if (curr.price <= state.rangeMax) {
         return [curr, ...prev];
       }
@@ -51,7 +51,7 @@ const getters = {
   },
   [getterTypes.ACTIVE_PRODUCTS]: (state, getters) => {
     if (!getters[getterTypes.HAS_ACTIVE_FILTER]) return state.allProducts;
-    else if (state.filters.category.isActive) {
+    if (state.filters.category.isActive) {
       const categoryProducts = getters[getterTypes.PRODUCTSBY_CATEGORY];
       // filter price
       if (state.filters.byPrice.isActive) {
@@ -64,9 +64,8 @@ const getters = {
       } else {
         return categoryProducts;
       }
-    } else {
-      return getters[getterTypes.PRODUCTSBY_RANGE];
     }
+    return getters[getterTypes.PRODUCTSBY_RANGE];
   }
 };
 
