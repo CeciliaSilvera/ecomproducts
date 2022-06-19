@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div class="heading">
-      <h1>Products</h1>
-    </div>
     <div class="product-list">
       <product-preview
         v-for="(product, idx) in activeProducts"

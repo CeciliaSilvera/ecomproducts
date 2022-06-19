@@ -58,4 +58,12 @@ describe("Products", () => {
     const hasActiveFilterAfter = await store.getters[getterTypes.HAS_ACTIVE_FILTER];
     expect(hasActiveFilterAfter).toBeFalsy();
   });
+  it("Should get max price from allProducts", async () => {
+    const maxPrice = await store.getters[getterTypes.MAX_PRICE];
+    expect(maxPrice).toBe(1000);
+  });
+  it("Should get min price from allProducts", async () => {
+    const minPrice = await store.getters[getterTypes.MIN_PRICE];
+    expect(minPrice).toBe(7);
+  });
 });
