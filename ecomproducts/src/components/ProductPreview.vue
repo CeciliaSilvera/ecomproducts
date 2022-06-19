@@ -1,6 +1,7 @@
 ﻿<template>
-  <div
+  <router-link
     class="product"
+    :to="`/product/${product.id}`"
   >
     <div
       class="thumbnail"
@@ -11,7 +12,7 @@
       <p>price: {{ product.price }}</p>
       <p>category: {{ product.category }}</p>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -27,6 +28,9 @@ export default {
 </script>
 
 <style scoped>
+  a {
+    text-decoration: none;
+  }
   .product {
     box-shadow: 0 0 4px #ccc;
     border: 1px solid #ccc;
@@ -34,8 +38,9 @@ export default {
     overflow: hidden;
     cursor: pointer;
     display: grid;
-    grid-template-rows: 1fr 2fr;
+    grid-template-rows: 1fr 1fr;
     grid-row-gap: 2rem;
+    max-height: 20rem;
   }
   
   .thumbnail {
