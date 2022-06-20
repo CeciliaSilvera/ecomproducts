@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "eslint src/**/*",
-    "lintfix": "eslint --fix src/**/*",
+    "lintfix": "eslint --fix src/**/* --ignore-pattern \"src/assets/**/*.svg\"",
     "test": "jest"
   },
   "dependencies": {
