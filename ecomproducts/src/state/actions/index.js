@@ -1,6 +1,10 @@
 ﻿import * as actionTypes from "./actionTypes";
 import * as mutationTypes from "../mutations/mutationTypes";
 import * as getterTypes from "../getters/getterTypes";
+import {
+  STORE_NAME as PAGINATION_STORE_NAME,
+  actionTypes as paginationActionTypes
+} from "@/state/modules/pagination";
 
 const actions = {
   [actionTypes.UPDATE_ALL_PRODUCTS]: ({
@@ -22,6 +26,8 @@ const actions = {
     dispatch(actionTypes.UPDATE_FILTERS, {
       ...state.filters
     });
+    // reset pagination
+    dispatch(`${ PAGINATION_STORE_NAME }/${ paginationActionTypes.UPDATE_CHUNK_INDEX }`, 0);
     commit(mutationTypes.SET_RANGE_MAX, rangeMax);
   },
   [actionTypes.UPDATE_CATEGORY]: ({
@@ -32,6 +38,8 @@ const actions = {
     dispatch(actionTypes.UPDATE_FILTERS, {
       ...state.filters 
     });
+    // reset pagination
+    dispatch(`${ PAGINATION_STORE_NAME }/${ paginationActionTypes.UPDATE_CHUNK_INDEX }`, 0);
     commit(mutationTypes.SET_CATEGORY, isSelectedTwice ? null : category);
   },
   [actionTypes.UPDATE_FILTERS]: ({
