@@ -13,7 +13,7 @@
         <img
           src="../assets/caret-down.svg"
           alt="arrow"
-          height="60"
+          height="40"
           class="arrow-left"
         >
       </button>
@@ -26,7 +26,7 @@
         <img
           src="../assets/caret-down.svg"
           alt="arrow"
-          height="60"
+          height="40"
           class="arrow-right"
         >
       </button>
@@ -123,8 +123,10 @@ export default {
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    background-color: #D3CBB8;
+    padding: 2rem;
+    background-color: #fefefe;
   }
+  
   .pagination {
     padding-bottom: 2rem;
   }

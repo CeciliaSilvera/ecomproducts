@@ -42,8 +42,9 @@ export default {
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 2rem;
     max-width: 70%;
-    background-color: #ffffff;
+    background-color: #fefefe;
   }
+  
 
   .thumbnail {
     background-repeat: no-repeat;

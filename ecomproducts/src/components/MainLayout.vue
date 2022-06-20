@@ -45,9 +45,4 @@ export default {
       "sidebar content content"
       "sidebar footer footer";
   }
-  /*.container {*/
-  /*  width: 90%;*/
-  /*  height: 95%;*/
-  /*  margin: auto auto;*/
-  /*}*/
 </style>
