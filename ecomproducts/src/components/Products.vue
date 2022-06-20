@@ -37,7 +37,9 @@
         :key="idx"
         ref="product-preview"
         :product="product"
-      />
+      >
+        Loading products
+      </product-preview>
     </div>
   </div>
 </template>
@@ -48,71 +50,43 @@ import {
   mapGetters, mapState,
 } from "vuex";
 import ProductPreview from "@/components/ProductPreview";
-import client from "@/client";
-import * as actionTypes from "@/state/actions/actionTypes";
+import {
+  STORE_NAME as PAGINATION_STORE_NAME,
+  getterTypes as paginationGetterTypes,
+  actionTypes as paginationActionTypes
+} from "@/state/modules/pagination";
 import * as getterTypes from "@/state/getters/getterTypes";
 export default {
   name: "Products",
   components: {
     ProductPreview
   },
-  data() {
-    return {
-      displayProducts: [],
-      chunkIndex: 0,
-      chunks: []
-    };
-  },
   computed:{
-    ...mapState({
-      allProducts: state => state.allProducts
+    ...mapState(PAGINATION_STORE_NAME, {
+      chunkIndex: state => state.chunkIndex
     }),
     ...mapGetters({
       activeProducts: getterTypes.ACTIVE_PRODUCTS
+    }),
+    ...mapGetters(PAGINATION_STORE_NAME, {
+      chunks: paginationGetterTypes.CHUNKS,
+      displayProducts: paginationGetterTypes.DISPLAY_PRODUCTS
     }),
     showPagination() {
       return this.chunks?.length > 1;
     }
   },
-  watch: {
-    // Note: There's a problem with these watchers that don't always update, 
-    // TODO: They should be replaced by getters in store. Might solve it
-    activeProducts() {
-      this.chunks = this.activeProducts?.reduce((prev, curr, index) => {
-        const chunkIndex = Math.floor(index/8);
-        if (!prev[chunkIndex]) {
-          prev[chunkIndex] = []; // start a new chunk
-        }
-        prev[chunkIndex].push(curr);
-        return prev;
-      }, []);
-      // restart if on different index on filtering
-      if (this.chunkIndex > this.chunks?.length) {
-        this.chunkIndex = 0;
-      }
-      this.displayProducts = this.chunks ? this.chunks[this.chunkIndex] : [];
-    },
-    chunkIndex() {
-      this.displayProducts = this.chunks ?  this.chunks[this.chunkIndex] : [];
-    }
-  },
-  async mounted() {
-    if (!this.activeProducts) {
-      const request = await client.getProducts();
-      this.updateAllProducts(request?.data ?? []);
-    }
-  },
   methods:{
-    ...mapActions({
-      updateAllProducts: actionTypes.UPDATE_ALL_PRODUCTS
+    ...mapActions(PAGINATION_STORE_NAME, {
+      updateChunkIndex: paginationActionTypes.UPDATE_CHUNK_INDEX
     }),
     goNext() {
-      if (this.chunks.length === this.chunkIndex +1) return false;
-      this.chunkIndex += 1;
+      let nextIndex = this.chunkIndex;
+      this.updateChunkIndex(nextIndex +=1);
     },
     goPrev() {
-      if (this.chunkIndex === 0) return false;
-      this.chunkIndex -= 1;
+      let prevIndex = this.chunkIndex;
+      this.updateChunkIndex(prevIndex -=1);
     }
   }
 };
@@ -125,6 +99,7 @@ export default {
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     padding: 2rem;
     background-color: #fefefe;
+    min-height: 300px;
   }
   
   .pagination {
