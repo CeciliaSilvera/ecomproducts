@@ -19,8 +19,9 @@ describe("Products", () => {
   beforeAll(() => {
     store.dispatch(actionTypes.UPDATE_ALL_PRODUCTS, allProducts);
   });
-  xit("Should show exactly 20 products", () => {
+  it("Should show exactly 8 products", () => {
     const wrapper = mount(Products, {
+      stubs: ['router-link', 'router-view'],
       localVue,
       store
     });
@@ -28,7 +29,7 @@ describe("Products", () => {
       ref: "product-preview" 
     });
     expect(products.exists()).toBeTruthy();
-    expect(products).toHaveLength(20);
+    expect(products).toHaveLength(8);
   });
   it("Should find all 4 categories", () => {
     const categories = store.getters[getterTypes.CATEGORIES];
